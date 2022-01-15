@@ -4,11 +4,11 @@ import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { BsFillPersonFill } from "react-icons/bs";
+import { BsFillPersonFill, BsCodeSlash } from "react-icons/bs";
 
 const sideBar_Items = [
   { Icon: <BsFillPersonFill />, Name: "User", Index: 0 },
-  { Icon: <BsFillPersonFill />, Name: "Projects", Index: 1 },
+  { Icon: <BsCodeSlash />, Name: "Projects", Index: 1 },
 ];
 
 const Sidebar = (props) => {
@@ -20,8 +20,9 @@ const Sidebar = (props) => {
         onClick={(event) => props.handleListItemClick(event, item.Index)}
       >
         <Box sx={{ color: "background.paper" }}>
-          {" "}
-          <ListItemIcon>{item.Icon}</ListItemIcon>
+          <ListItemIcon sx={{ color: "background.paper" }}>
+            {item.Icon}
+          </ListItemIcon>
         </Box>
         <ListItemText primary={item.Name} />
       </ListItemButton>
@@ -30,7 +31,7 @@ const Sidebar = (props) => {
 
   return (
     <div>
-      <Box sx={{ color: "#007fff" }}>
+      <Box sx={{ color: "#7e57c2" }}>
         <h1>Powered by Firebase</h1>
       </Box>
       <h1 />
