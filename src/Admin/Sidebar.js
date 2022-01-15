@@ -7,8 +7,8 @@ import ListItemText from "@mui/material/ListItemText";
 import { BsFillPersonFill } from "react-icons/bs";
 
 const sideBar_Items = [
-  { Icon: <BsFillPersonFill />, Name: "User", Index: "0" },
-  { Icon: <BsFillPersonFill />, Name: "Projects", Index: "1" },
+  { Icon: <BsFillPersonFill />, Name: "User", Index: 0 },
+  { Icon: <BsFillPersonFill />, Name: "Projects", Index: 1 },
 ];
 
 const Sidebar = (props) => {
@@ -19,7 +19,10 @@ const Sidebar = (props) => {
         selected={props.selectedIndex === item.Index}
         onClick={(event) => props.handleListItemClick(event, item.Index)}
       >
-        <ListItemIcon>{item.Icon}</ListItemIcon>
+        <Box sx={{ color: "background.paper" }}>
+          {" "}
+          <ListItemIcon>{item.Icon}</ListItemIcon>
+        </Box>
         <ListItemText primary={item.Name} />
       </ListItemButton>
     );
