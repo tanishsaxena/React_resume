@@ -5,6 +5,9 @@ const Toolbar = () => {
   return (
     <div>
       <BsFillLightbulbFill /> Tip!
+      <br />
+      <br />
+      Click on Project Name to view details.
     </div>
   );
 };
