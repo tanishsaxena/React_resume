@@ -4,6 +4,8 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
 import { BsFillArrowDownCircleFill } from "react-icons/bs";
+import Button from "@mui/material/Button";
+import ProjectModal from "./ProjectModal";
 
 const project_data = [
   {
@@ -57,7 +59,12 @@ const Projects = () => {
     );
   });
 
-  return <div>{render_projects}</div>;
+  return (
+    <div>
+      <ProjectModal />
+      {render_projects}
+    </div>
+  );
 };
 
 export default Projects;

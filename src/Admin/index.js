@@ -9,7 +9,10 @@ import LinearProgress from "@mui/material/LinearProgress";
 import Toolbar from "./Toolbar";
 import Main from "./Main";
 
+const guser = "user_100";
+
 const Index = () => {
+  const [loggedInUser, setLoggedInUser] = useState("User");
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -20,11 +23,11 @@ const Index = () => {
 
   useEffect(async () => {
     setIsLoading(true);
-    const docRef = doc(db, "users", "SF");
+    const docRef = doc(db, "data", "users", "user_config", guser);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
+      setLoggedInUser(docSnap.data().name);
       setIsLoading(false);
     } else {
       console.log("No such document!");
@@ -57,7 +60,7 @@ const Index = () => {
               borderBottom: 1,
             }}
           >
-            <h1>Welcome User.</h1>
+            <h1>Welcome {loggedInUser}.</h1>
           </Box>
           <Box sx={{ width: "100%" }}>{loader}</Box>
 
