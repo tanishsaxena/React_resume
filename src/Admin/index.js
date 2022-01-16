@@ -66,7 +66,7 @@ const Index = () => {
             sx={{ height: "80vh", width: "100%", marginTop: "1%" }}
           >
             <Grid item xs={10} sx={{ color: "white", padding: 2 }}>
-              <Main />
+              <Main index={selectedIndex} />
             </Grid>
             <Grid
               item
