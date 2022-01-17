@@ -60,7 +60,7 @@ const Index = () => {
               borderBottom: 1,
             }}
           >
-            <h1>Welcome {loggedInUser}.</h1>
+            <h1 style={{"fontFamily": "Ginto, serif"}}>Welcome {loggedInUser}.</h1>
           </Box>
           <Box sx={{ width: "100%" }}>{loader}</Box>
 
