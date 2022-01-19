@@ -1,5 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setLoaderOn, setLoaderOff } from "../Actions";
 import { db } from "../Firebase/config";
 import { doc, getDoc } from "firebase/firestore";
 import { Grid } from "@mui/material";
@@ -14,7 +16,9 @@ const guser = "user_100";
 const Index = () => {
   const [loggedInUser, setLoggedInUser] = useState("User");
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
+
+  const isLoading = useSelector((state) => state.changeLoader);
+  const dispatch = useDispatch();
 
   const handleListItemClick = (event, index) => {
     console.log(index);
@@ -22,16 +26,16 @@ const Index = () => {
   };
 
   useEffect(async () => {
-    setIsLoading(true);
+    dispatch(setLoaderOn());
     const docRef = doc(db, "data", "users", "user_config", guser);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
       setLoggedInUser(docSnap.data().name);
-      setIsLoading(false);
+      dispatch(setLoaderOff());
     } else {
       console.log("No such document!");
-      setIsLoading(false);
+      dispatch(setLoaderOff());
     }
   }, []);
 
@@ -60,7 +64,7 @@ const Index = () => {
               borderBottom: 1,
             }}
           >
-            <h1 style={{"fontFamily": "Ginto, serif"}}>Welcome {loggedInUser}.</h1>
+            <h1>Welcome {loggedInUser}.</h1>
           </Box>
           <Box sx={{ width: "100%" }}>{loader}</Box>
 

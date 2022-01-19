@@ -6,7 +6,6 @@ import Typography from "@mui/material/Typography";
 import { BsFillArrowDownCircleFill } from "react-icons/bs";
 import ProjectModal from "./ProjectModal";
 import { useSelector, useDispatch } from "react-redux";
-import { addProject } from "../Actions";
 
 const Projects = () => {
   const project_data = useSelector((state) => state.addProject);
