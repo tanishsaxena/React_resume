@@ -1,6 +1,7 @@
 import { db } from "../Firebase/config";
 import { doc, setDoc } from "firebase/firestore";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { collection, query, getDocs } from "firebase/firestore";
 
 const project_data = [];
 
