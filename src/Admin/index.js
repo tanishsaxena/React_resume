@@ -11,9 +11,8 @@ import LinearProgress from "@mui/material/LinearProgress";
 import Toolbar from "./Toolbar";
 import Main from "./Main";
 
-const guser = "user_100";
-
 const Index = () => {
+  const guser = useSelector((state) => state.globalUser);
   const [loggedInUser, setLoggedInUser] = useState("User");
   const [selectedIndex, setSelectedIndex] = useState(0);
 

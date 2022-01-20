@@ -9,3 +9,7 @@ export const setLoaderOn = () => {
 export const setLoaderOff = () => {
   return { type: "SETLOADEROFF" };
 };
+
+export const setGlobalUser = (user) => {
+  return { type: "SETGLOBALUSER", payload: user };
+};

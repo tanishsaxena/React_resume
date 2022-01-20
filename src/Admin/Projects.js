@@ -6,8 +6,31 @@ import Typography from "@mui/material/Typography";
 import { BsFillArrowDownCircleFill } from "react-icons/bs";
 import ProjectModal from "./ProjectModal";
 import { useSelector, useDispatch } from "react-redux";
+import { db } from "../Firebase/config";
+import { collection, query, getDocs } from "firebase/firestore";
+import { addProject } from "../Actions";
 
 const Projects = () => {
+  const dispatch = useDispatch();
+  React.useEffect(async () => {
+    const q = query(
+      collection(db, "data", "users", "user_config", "user_100", "Projects")
+    );
+
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      var p_data = {
+        id: doc.data().id,
+        name: doc.data().name,
+        summary: doc.data().summary,
+        tech_used: doc.data().tech_used,
+        link: doc.data().link,
+        date_created: doc.data().date_created,
+      };
+      dispatch(addProject(p_data));
+    });
+  }, []);
+
   const project_data = useSelector((state) => state.addProject);
   const [expanded, setExpanded] = React.useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
