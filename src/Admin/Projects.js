@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { db } from "../Firebase/config";
 import { collection, query, getDocs } from "firebase/firestore";
 import { addProject } from "../Actions";
+import EmptyDisplay from "./EmptyDisplay";
 
 var firstload = true;
 
@@ -44,7 +45,7 @@ const Projects = () => {
     }
   }, []);
 
-  const render_projects = project_data.map((pr) => {
+  var render_projects = project_data.map((pr) => {
     return (
       <Accordion
         key={pr.id}
@@ -69,6 +70,10 @@ const Projects = () => {
       </Accordion>
     );
   });
+
+  if (render_projects.length === 0) {
+    render_projects = <EmptyDisplay />;
+  }
 
   return (
     <div>
