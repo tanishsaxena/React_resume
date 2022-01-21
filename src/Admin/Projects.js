@@ -3,19 +3,37 @@ import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
-import { BsFillArrowDownCircleFill } from "react-icons/bs";
+import { BsFillArrowDownCircleFill, BsThreeDotsVertical } from "react-icons/bs";
 import ProjectModal from "./ProjectModal";
 import { useSelector, useDispatch } from "react-redux";
 import { db } from "../Firebase/config";
-import { collection, query, getDocs } from "firebase/firestore";
+import { collection, query, getDocs, doc, deleteDoc } from "firebase/firestore";
 import { addProject } from "../Actions";
 import EmptyDisplay from "./EmptyDisplay";
+import IconButton from "@mui/material/IconButton";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 
 var firstload = true;
+
+const options = ["Delete"];
 
 const Projects = () => {
   const guser = useSelector((state) => state.globalUser);
   const dispatch = useDispatch();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = async (id, action) => {
+    if (action.option === "Delete") {
+      await deleteDoc(
+        doc(db, "data", "users", "user_config", guser, "Projects", id)
+      );
+    }
+    setAnchorEl(null);
+  };
 
   const project_data = useSelector((state) => state.addProject);
   const [expanded, setExpanded] = React.useState(false);
@@ -57,6 +75,43 @@ const Projects = () => {
           aria-controls="panel1bh-content"
           id="panel1bh-header"
         >
+          <>
+            <div>
+              <IconButton
+                aria-label="more"
+                id="long-button"
+                aria-controls={open ? "long-menu" : undefined}
+                aria-expanded={open ? "true" : undefined}
+                aria-haspopup="true"
+                onClick={handleClick}
+              >
+                <BsThreeDotsVertical />
+              </IconButton>
+              <Menu
+                id="long-menu"
+                MenuListProps={{
+                  "aria-labelledby": "long-button",
+                }}
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                PaperProps={{
+                  style: {
+                    width: "20ch",
+                  },
+                }}
+              >
+                {options.map((option) => (
+                  <MenuItem
+                    key={option}
+                    onClick={() => handleClose(pr.id, { option })}
+                  >
+                    {option}
+                  </MenuItem>
+                ))}
+              </Menu>
+            </div>
+          </>
           <Typography sx={{ width: "33%", flexShrink: 0 }}>
             {pr.name}
           </Typography>
