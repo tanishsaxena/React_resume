@@ -2,6 +2,10 @@ export const addProject = (data) => {
   return { type: "ADD_PROJECT", payload: data };
 };
 
+export const deleteProject = (id) => {
+  return { type: "DELETE_PROJECT", payload: id };
+};
+
 export const setLoaderOn = () => {
   return { type: "SETLOADERON" };
 };

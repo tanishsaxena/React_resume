@@ -8,7 +8,7 @@ import ProjectModal from "./ProjectModal";
 import { useSelector, useDispatch } from "react-redux";
 import { db } from "../Firebase/config";
 import { collection, query, getDocs, doc, deleteDoc } from "firebase/firestore";
-import { addProject } from "../Actions";
+import { addProject, deleteProject } from "../Actions";
 import EmptyDisplay from "./EmptyDisplay";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
@@ -27,11 +27,9 @@ const Projects = () => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = async (id, action) => {
-    if (action.option === "Delete") {
-      await deleteDoc(
-        doc(db, "data", "users", "user_config", guser, "Projects", id)
-      );
-    }
+    console.log(id);
+    dispatch(deleteProject(id));
+
     setAnchorEl(null);
   };
 
@@ -75,6 +73,7 @@ const Projects = () => {
           aria-controls="panel1bh-content"
           id="panel1bh-header"
         >
+          {pr.id}
           <>
             <div>
               <IconButton
