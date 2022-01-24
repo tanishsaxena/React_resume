@@ -26,9 +26,9 @@ const Projects = () => {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = async (id, action) => {
-    console.log(id);
-    dispatch(deleteProject(id));
+  const handleClose = async (event) => {
+    console.log(event.target.id);
+    //dispatch(deleteProject(id));
 
     setAnchorEl(null);
   };
@@ -60,6 +60,12 @@ const Projects = () => {
       });
     }
   }, []);
+
+  let opt = options.map((option) => (
+    <MenuItem key={option} id={"d" + pr.id} onClick={handleClose}>
+      {option}
+    </MenuItem>
+  ));
 
   var render_projects = project_data.map((pr) => {
     return (
@@ -100,14 +106,7 @@ const Projects = () => {
                   },
                 }}
               >
-                {options.map((option) => (
-                  <MenuItem
-                    key={option}
-                    onClick={() => handleClose(pr.id, { option })}
-                  >
-                    {option}
-                  </MenuItem>
-                ))}
+                {opt}
               </Menu>
             </div>
           </>
